@@ -3,15 +3,21 @@ package com.example.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
 public class Dosage {
     @Id
-    public Long medication_id;
+    public Long medicationId;
 
+    @NotNull(message = "Maximum dosage is required")
+    @Digits(integer = 10, fraction = 2, message = "Maximum factor must be a number with up to 10 digits and 2 decimal places")
     public BigDecimal maximum_factor;
 
+    @NotNull(message = "Minimum dosage is required")
+    @Digits(integer = 10, fraction = 2, message = "Minimum factor must be a number with up to 10 digits and 2 decimal places")
     public BigDecimal minimum_factor;
 
     public String dosage_frequency;
@@ -20,19 +26,19 @@ public class Dosage {
     public Dosage() {
     }
 
-    public Dosage(Long medication_id, BigDecimal maximum_factor, BigDecimal minimum_factor, String dosage_frequency) {
-        this.medication_id = medication_id;
+    public Dosage(Long medicationId, BigDecimal maximum_factor, BigDecimal minimum_factor, String dosage_frequency) {
+        this.medicationId = medicationId;
         this.maximum_factor = maximum_factor;
         this.minimum_factor = minimum_factor;
         this.dosage_frequency = dosage_frequency;
     }
 
-    public Long getMedication_id() {
-        return medication_id;
+    public Long getMedicationId() {
+        return medicationId;
     }
 
-    public void setMedication_id(Long medication_id) {
-        this.medication_id = medication_id;
+    public void setMedicationId(Long medication_id) {
+        this.medicationId = medication_id;
     }
 
     public BigDecimal getMaximum_factor() {
@@ -62,7 +68,7 @@ public class Dosage {
     @Override
     public String toString() {
         return "Dosage{" +
-                "medication_id=" + medication_id +
+                "medication_id=" + medicationId +
                 ", maximum_factor=" + maximum_factor +
                 ", minimum_factor=" + minimum_factor +
                 ", dosage_frequency='" + dosage_frequency + '\'' +

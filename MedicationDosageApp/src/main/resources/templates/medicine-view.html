@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Medicine Details</title>
 </head>
 <body>
-
+<h1>Medicine Details</h1>
+<div>
+    <label>ID:</label>
+    <span th:text="${medicine.id}"></span>
+</div>
+<div>
+    <label>Name:</label>
+    <span th:text="${medicine.name}"></span>
+</div>
+<div>
+    <label>Details:</label>
+    <span th:text="${medicine.details}"></span>
+</div>
+<div>
+    <label>Maximum Dosage:</label>
+    <span th:text="${dosage.maximum_factor}"></span>
+</div>
+<div>
+    <label>Minimum Dosage:</label>
+    <span th:text="${dosage.minimum_factor}"></span>
+</div>
+<div>
+    <label>Dosage Frequency:</label>
+    <span th:text="${dosage.dosage_frequency}"></span>
+</div>
+<div>
+    <a th:href="@{/medicines}">Back to list</a>
+</div>
 </body>
 </html>

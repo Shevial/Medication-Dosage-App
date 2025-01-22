@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.model.Medicine;
 import com.example.model.Dosage;
 import com.example.repository.DosageRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.ui.Model; //correct import for addAttribute
 import com.example.repository.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class MedicineController {
         model.addAttribute("dosage", new Dosage());
         return "medicine-form"; //screen form
     }
-    @GetMapping("/medicines/edit")
+    @GetMapping("/medicines/edit/{id}")
     public String getEditForm(Model model, @PathVariable Long id) {
         if(medicineRepository.existsById(id)){
         medicineRepository.findById(id).ifPresent(existingMedicine -> {
@@ -68,35 +69,44 @@ public class MedicineController {
 
     @PostMapping("/medicines")
     /*public String createMedicine(@ModelAttribute Medicine medicine, @ModelAttribute Dosage dosage) {*/
-    public String createMedicine(@Valid @ModelAttribute Medicine medicine, BindingResult result, @Valid @ModelAttribute Dosage dosage, BindingResult dosageResult, Model model) {
-        if (result.hasErrors() || dosageResult.hasErrors()) {
+    public String createMedicine(@Valid @ModelAttribute Medicine medicine, BindingResult medicineresult, @Valid @ModelAttribute Dosage dosage, BindingResult dosageResult, Model model) {
+        if (medicineresult.hasErrors() || dosageResult.hasErrors()) {
             model.addAttribute("medicine", medicine);
             model.addAttribute("dosage", dosage);
             return "medicine-form"; // Si hay errores, vuelve al formulario
-        } //probando hasta aqui
-        if(medicine.getId() != null) {
-            //updating
-            medicineRepository.findById(medicine.getId()).ifPresent(existingMedicine -> {
+        }
+        if (medicine.getId() != null) {
+            // Actualizando
+            Medicine existingMedicine = medicineRepository.findById(medicine.getId()).orElse(null);
+            if (existingMedicine != null) {
                 existingMedicine.setName(medicine.getName());
                 existingMedicine.setDetails(medicine.getDetails());
                 medicineRepository.save(existingMedicine);
-            });
-            dosageRepository.findById(dosage.getMedicationId()).ifPresent(existingDosage -> {
-               existingDosage.setMinimum_factor(dosage.getMinimum_factor());
-               existingDosage.setMaximum_factor(dosage.getMaximum_factor());
-               existingDosage.setDosage_frequency(dosage.getDosage_frequency());
-               dosageRepository.save(existingDosage);
-            });
+            }
+
+            Dosage existingDosage = dosageRepository.findByMedicationId(medicine.getId());
+            if (existingDosage != null) {
+                existingDosage.setMinimum_factor(dosage.getMinimum_factor());
+                existingDosage.setMaximum_factor(dosage.getMaximum_factor());
+                existingDosage.setDosage_frequency(dosage.getDosage_frequency());
+                dosageRepository.save(existingDosage);
+            } else {
+                dosage.setMedicationId(medicine.getId());
+                dosageRepository.save(dosage);
+            }
         } else {
-            //creating
+            // Creando
             Medicine savedMedicine = medicineRepository.save(medicine);
             dosage.setMedicationId(savedMedicine.getId());
             dosageRepository.save(dosage);
         }
-        return "redirect:/medicines"; // redirects to medicines controller
+
+        return "redirect:/medicines"; // Redirige al controlador de medicinas
     }
+
 ////////////////////////////////////DATA DELETION////////////////////////////////////
 
+@Transactional
 @GetMapping("/medicines/delete/{id}")
     public String deleteById(@PathVariable Long id) {
     // Eliminar el medicamento y sus dosificaciones asociadas

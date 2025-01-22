@@ -74,5 +74,6 @@ public class Dosage {
                 ", dosage_frequency='" + dosage_frequency + '\'' +
                 '}';
     }
+
 }
 

@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Medicine Form</title>
+    <title>Formulario de Medicina</title>
 </head>
 <body>
-<h1>Medicine Form</h1>
 <form th:action="@{/medicines}" th:object="${medicine}" method="post">
+    <input type="hidden" th:field="*{id}" />
     <div>
-        <label for="name">Name:</label>
+        <label for="name">Nombre:</label>
         <input type="text" id="name" th:field="*{name}" />
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Nombre es obligatorio</div>
     </div>
     <div>
-        <label for="details">Details:</label>
+        <label for="details">Detalles:</label>
         <input type="text" id="details" th:field="*{details}" />
+        <div th:if="${#fields.hasErrors('details')}" th:errors="*{details}">Detalles son obligatorios</div>
     </div>
+
     <div th:object="${dosage}">
-        <label for="maximum_factor">Maximum Dosage:</label>
-        <input type="text" id="maximum_factor" th:field="*{maximum_factor}" />
+        <input type="hidden" th:field="*{medicationId}" />
+        <input type="hidden" th:field="*{medicationId}" />
+        <div>
+            <label for="minimum_factor">Factor Mínimo:</label>
+            <input type="text" id="minimum_factor" th:field="*{minimum_factor}" />
+            <div th:if="${#fields.hasErrors('minimum_factor')}" th:errors="*{minimum_factor}">Factor mínimo es obligatorio</div>
+        </div>
+        <div>
+            <label for="maximum_factor">Factor Máximo:</label>
+            <input type="text" id="maximum_factor" th:field="*{maximum_factor}" />
+            <div th:if="${#fields.hasErrors('maximum_factor')}" th:errors="*{maximum_factor}">Factor máximo es obligatorio</div>
+        </div>
+        <div>
+            <label for="dosage_frequency">Frecuencia de Dosificación:</label>
+            <input type="text" id="dosage_frequency" th:field="*{dosage_frequency}" />
+            <div th:if="${#fields.hasErrors('dosage_frequency')}" th:errors="*{dosage_frequency}">Frecuencia de dosificación es obligatoria</div>
+        </div>
     </div>
-    <div th:object="${dosage}">
-        <label for="minimum_factor">Minimum Dosage:</label>
-        <input type="text" id="minimum_factor" th:field="*{minimum_factor}" />
-    </div>
-    <div th:object="${dosage}">
-        <label for="dosage_frequency">Dosage Frequency:</label>
-        <input type="text" id="dosage_frequency" th:field="*{dosage_frequency}" />
-    </div>
-    <div>
-        <button type="submit">Save</button>
-    </div>
+
+    <button type="submit">Guardar</button>
 </form>
 </body>
 </html>

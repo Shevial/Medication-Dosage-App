@@ -100,7 +100,8 @@ public class MedicineController {
             dosage.setMedicationId(savedMedicine.getId());
             dosageRepository.save(dosage);
         }
-
+        System.out.println("Medicine saved: " + medicine);
+        System.out.println("Dosage saved: " + dosage);
         return "redirect:/medicines"; // Redirige al controlador de medicinas
     }
 

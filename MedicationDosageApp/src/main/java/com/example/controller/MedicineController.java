@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.model.Medicine;
 import com.example.model.Dosage;
 import com.example.repository.DosageRepository;
+import com.example.service.ValidationService;
 import jakarta.transaction.Transactional;
 import org.springframework.ui.Model; //correct import for addAttribute
 import com.example.repository.MedicineRepository;
@@ -24,6 +25,9 @@ public class MedicineController {
 
     @Autowired
     private DosageRepository dosageRepository;
+
+    @Autowired
+    private ValidationService validationService;
 
 ////////////////////////////////////DATA RETRIEVAL////////////////////////////////////
 
@@ -68,9 +72,8 @@ public class MedicineController {
     }
 
     @PostMapping("/medicines")
-    /*public String createMedicine(@ModelAttribute Medicine medicine, @ModelAttribute Dosage dosage) {*/
-    public String createMedicine(@Valid @ModelAttribute Medicine medicine, BindingResult medicineresult, @Valid @ModelAttribute Dosage dosage, BindingResult dosageResult, Model model) {
-        if (medicineresult.hasErrors() || dosageResult.hasErrors()) {
+    public String createMedicine(@ModelAttribute Medicine medicine, BindingResult medicineresult, @ModelAttribute Dosage dosage, BindingResult dosageResult, Model model) {
+        if (!validationService.validateMedicineAndDosage(medicine, dosage, model)) {
             model.addAttribute("medicine", medicine);
             model.addAttribute("dosage", dosage);
             return "medicine-form"; // Si hay errores, vuelve al formulario

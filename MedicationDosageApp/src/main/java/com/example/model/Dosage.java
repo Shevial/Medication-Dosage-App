@@ -3,8 +3,6 @@ package com.example.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -12,12 +10,8 @@ public class Dosage {
     @Id
     public Long medicationId;
 
-    @NotNull(message = "Maximum dosage is required")
-    @Digits(integer = 10, fraction = 2, message = "Maximum factor must be a number with up to 10 digits and 2 decimal places")
     public BigDecimal maximum_factor;
 
-    @NotNull(message = "Minimum dosage is required")
-    @Digits(integer = 10, fraction = 2, message = "Minimum factor must be a number with up to 10 digits and 2 decimal places")
     public BigDecimal minimum_factor;
 
     public String dosage_frequency;

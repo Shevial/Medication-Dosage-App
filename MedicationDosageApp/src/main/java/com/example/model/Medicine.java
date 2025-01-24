@@ -8,19 +8,14 @@ import jakarta.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-
 @Entity
 public class Medicine {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-
     private Long id;
 
-    @NotEmpty(message = "El nombre es obligatorio")
-    @Size(min = 2, max = 30, message = "Name must have between 2 and 30 characters")
     private String name;
 
-    @Size(max = 200, message = "Details must be under 200 characters")
     private String details;
 
     public Medicine() {

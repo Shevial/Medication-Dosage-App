@@ -1,9 +1,6 @@
 package com.example.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -17,6 +14,18 @@ public class Medicine {
     private String name;
 
     private String details;
+
+    @ManyToOne
+    @JoinColumn(name = "dosage_medication_id")
+    private Dosage dosage;
+
+    public Dosage getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(Dosage dosage) {
+        this.dosage = dosage;
+    }
 
     public Medicine() {
     }

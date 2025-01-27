@@ -16,15 +16,18 @@ public class Dosage {
 
     public String dosage_frequency;
 
+    public BigDecimal max_daily_dose;
 
     public Dosage() {
     }
 
-    public Dosage(Long medicationId, BigDecimal maximum_factor, BigDecimal minimum_factor, String dosage_frequency) {
+    public Dosage(Long medicationId, BigDecimal maximum_factor, BigDecimal minimum_factor, String dosage_frequency, BigDecimal max_daily_dose) {
         this.medicationId = medicationId;
         this.maximum_factor = maximum_factor;
         this.minimum_factor = minimum_factor;
         this.dosage_frequency = dosage_frequency;
+        this.max_daily_dose = max_daily_dose;
+
     }
 
     public Long getMedicationId() {
@@ -59,15 +62,19 @@ public class Dosage {
         this.dosage_frequency = dosage_frequency;
     }
 
+    public BigDecimal getMax_daily_dose() {return max_daily_dose;}
+
+    public void setMax_daily_dose(BigDecimal max_daily_dose) {this.max_daily_dose = max_daily_dose;}
+
     @Override
     public String toString() {
         return "Dosage{" +
-                "medication_id=" + medicationId +
+                "medicationId=" + medicationId +
                 ", maximum_factor=" + maximum_factor +
                 ", minimum_factor=" + minimum_factor +
                 ", dosage_frequency='" + dosage_frequency + '\'' +
+                ", max_daily_dose=" + max_daily_dose +
                 '}';
     }
-
 }
 

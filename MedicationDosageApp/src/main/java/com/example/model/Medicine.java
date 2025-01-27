@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Entity
 public class Medicine {
@@ -12,6 +13,8 @@ public class Medicine {
     private Long id;
 
     private String name;
+
+    private BigDecimal concentration;
 
     private String details;
 

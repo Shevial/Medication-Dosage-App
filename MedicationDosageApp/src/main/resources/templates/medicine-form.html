@@ -35,6 +35,11 @@
             <input type="text" id="dosage_frequency" th:field="*{dosage_frequency}" />
             <div th:if="${#fields.hasErrors('dosage_frequency')}" th:errors="*{dosage_frequency}">Frecuencia de dosificación es obligatoria</div>
         </div>
+        <div>
+            <label for="max_daily_dose">>Maxima dosis diaria</label>
+            <input type="text" id="max_daily_dose" th:field="*{max_daily_dose}" />
+            <div th:if="${#fields.hasErrors('dosage_frequency')}" th:errors="*{max_daily_dose}">Maxima dosis diaria</div>
+        </div>
     </div>
 
     <button type="submit">Guardar</button>

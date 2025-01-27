@@ -10,7 +10,7 @@ public class DosageCalculator {
         if (patient == null) {
             throw new IllegalArgumentException("Patient cannot be null");
         }
-
+return 0;
 
         // dosis = (peso x dosis)/peso
     }

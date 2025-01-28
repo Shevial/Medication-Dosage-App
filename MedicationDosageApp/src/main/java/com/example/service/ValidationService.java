@@ -33,6 +33,10 @@ public class ValidationService {
             model.addAttribute("error", "Details must be under 200 characters");
             return false;
         }
+       /* if(medicine.getConcentration() != null && medicine.getConcentration().doubleValue() <= 0) {
+            model.addAttribute("error", "Concentration must be greater than 0");
+            return false;
+        }*/
 
         // Validación del máximo factor de dosificación
         if (dosage.getMaximum_factor() == null || dosage.getMaximum_factor().compareTo(BigDecimal.ZERO) <= 0) {

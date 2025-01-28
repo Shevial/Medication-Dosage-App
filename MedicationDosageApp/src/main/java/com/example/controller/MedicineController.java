@@ -84,6 +84,7 @@ public class MedicineController {
             if (existingMedicine != null) {
                 existingMedicine.setName(medicine.getName());
                 existingMedicine.setDetails(medicine.getDetails());
+                //existingMedicine.setConcentration(medicine.getConcentration());
                 medicineRepository.save(existingMedicine);
             }
 

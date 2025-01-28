@@ -27,7 +27,7 @@ public class Dosage {
         this.minimum_factor = minimum_factor;
         this.dosage_frequency = dosage_frequency;
         this.max_daily_dose = max_daily_dose;
-//bien?
+
     }
 
     public Long getMedicationId() {

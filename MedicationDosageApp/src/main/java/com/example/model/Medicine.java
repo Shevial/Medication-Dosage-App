@@ -2,8 +2,6 @@ package com.example.model;
 
 import jakarta.persistence.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Entity
@@ -14,7 +12,7 @@ public class Medicine {
 
     private String name;
 
-    private BigDecimal concentration;
+    //private BigDecimal concentration;
 
     private String details;
 
@@ -63,12 +61,22 @@ public class Medicine {
         this.details = details;
     }
 
+   /* public BigDecimal getConcentration() {
+        return concentration;
+    }
+
+    public void setConcentration(BigDecimal concentration) {
+        this.concentration = concentration;
+    }*/
+
     @Override
     public String toString() {
         return "Medicine{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", details='" + details + '\'' +
+               // ", concentration='" + concentration + '\'' +
+
                 '}';
     }
 }

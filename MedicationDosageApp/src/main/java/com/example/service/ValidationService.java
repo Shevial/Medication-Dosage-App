@@ -56,7 +56,7 @@ public class ValidationService {
             model.addAttribute("error", "Dosage frequency must be under 255 characters");
             return false;
         }
-
+//comment
         return true; // No errors
     }
 }

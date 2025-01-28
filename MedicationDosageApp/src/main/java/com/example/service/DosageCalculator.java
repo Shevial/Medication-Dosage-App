@@ -3,9 +3,11 @@ package com.example.service;
 import com.example.model.Dosage;
 import com.example.model.Medicine;
 import com.example.model.Patient;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+@Service
 public class DosageCalculator {
 
     public String calculateDosage(Patient patient, Medicine medicine, Dosage dosage) {
@@ -16,7 +18,10 @@ public class DosageCalculator {
         try {
             verifyLimits(medicine, dosage, patient);
             BigDecimal minDose = minDoseAdjusted(patient, dosage);
-            return "Medication is valid. Recommended dosage for " + patient.getWeight() + " kg is: " + minDose;
+            BigDecimal maxDose = maxDoseAdjusted(patient, dosage);
+            return "Medication is valid. Recommended dosage for " + patient.getWeight() + " kg is: " + minDose +
+                    ". Do NOT exceed maximum daily dose: "+ dosage.getMax_daily_dose() + " and do not exceed maximum dose: " +
+                    maxDose;
         } catch (IllegalArgumentException e) {
             return e.getMessage();
         }
@@ -88,7 +93,8 @@ public class DosageCalculator {
         if (!verifyAge(patient)) {
             throw new IllegalArgumentException("Medication " + medicine.getName() + " is not safe for patient age: " + patient.getAge());
         }
-    }
 
     }
+
+}
 

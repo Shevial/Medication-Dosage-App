@@ -2,7 +2,6 @@ package com.example.service;
 
 import com.example.model.Medicine;
 import com.example.model.Dosage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Service;
 

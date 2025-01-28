@@ -1,6 +1,7 @@
 package com.example.model;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 
@@ -28,9 +29,11 @@ public class Medicine {
         this.dosage = dosage;
     }
 
+
     public Medicine() {
     }
 
+    @Autowired
     public Medicine(Long id, String name, String details) {
         this.id = id;
         this.name = name;

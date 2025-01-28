@@ -3,10 +3,10 @@ package com.example.model;
 public class Patient {
 
     private final Integer age;
-    private final Double weight;
+    private final Integer weight;
 
     // Constructor sin setters, solo con un constructor
-    public Patient(String gender, Integer age, Double weight) {
+    public Patient(Integer age, Integer weight) {
 
         // Validación para el campo 'age'
         if (age == null) {
@@ -31,8 +31,6 @@ public class Patient {
     }
 
 
-
-
     public int getAge() {
         return age;
     }
@@ -44,7 +42,7 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient{" +
-                ", age=" + age +
+                " age=" + age +
                 ", weight=" + weight +
                 '}';
     }

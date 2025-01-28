@@ -3,6 +3,7 @@ package com.example.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+
 import java.math.BigDecimal;
 
 @Entity
@@ -66,6 +67,7 @@ public class Dosage {
 
     public void setMax_daily_dose(BigDecimal max_daily_dose) {this.max_daily_dose = max_daily_dose;}
 
+
     @Override
     public String toString() {
         return "Dosage{" +
@@ -76,5 +78,6 @@ public class Dosage {
                 ", max_daily_dose=" + max_daily_dose +
                 '}';
     }
+
 }
 

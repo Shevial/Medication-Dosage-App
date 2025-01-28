@@ -9,7 +9,6 @@ import org.springframework.ui.Model; //correct import for addAttribute
 import com.example.repository.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,7 +71,7 @@ public class MedicineController {
     }
 
     @PostMapping("/medicines")
-    public String createMedicine(@ModelAttribute Medicine medicine, BindingResult medicineresult, @ModelAttribute Dosage dosage, BindingResult dosageResult, Model model) {
+    public String createMedicine(@ModelAttribute Medicine medicine, /*BindingResult medicineresult,*/ @ModelAttribute Dosage dosage,/* BindingResult dosageResult,*/ Model model) {
         if (!validationService.validateMedicineAndDosage(medicine, dosage, model)) {
             model.addAttribute("medicine", medicine);
             model.addAttribute("dosage", dosage);

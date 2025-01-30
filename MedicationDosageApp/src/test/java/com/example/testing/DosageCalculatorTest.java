@@ -50,7 +50,7 @@ class DosageCalculatorTest {
     @Test
     void testMinDoseAdjusted() {
         // Arrange
-        Patient patient = new Patient(25, 80);
+        Patient patient = new Patient(55, 80);
         Dosage dosage = new Dosage();
         dosage.setMinimum_factor(BigDecimal.valueOf(10)); // 10 mg
 
@@ -64,7 +64,7 @@ class DosageCalculatorTest {
     @Test
     void testCalculateDosageValid() {
         // Arrange
-        Patient patient = new Patient(30, 60);
+        Patient patient = new Patient(70, 60);
         Medicine medicine = new Medicine();
         medicine.setName("Aspirin");
         Dosage dosage = new Dosage();

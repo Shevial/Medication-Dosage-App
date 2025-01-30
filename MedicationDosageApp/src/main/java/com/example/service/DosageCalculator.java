@@ -29,7 +29,7 @@ public class DosageCalculator {
     }
     //ESTIMATING DOSE PER KG
 
-    //doseperkg = minimum_factor / average weight
+    //dosePerKg = minimum_factor / average weight
 
     public BigDecimal minDosePerKg(Dosage dosage){
 

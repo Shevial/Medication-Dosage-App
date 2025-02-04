@@ -6,6 +6,7 @@ import com.example.model.Dosage;
 import com.example.service.DosageCalculator;
 import com.example.repository.MedicineRepository;
 import com.example.repository.DosageRepository;
+import com.example.service.DosageCalculatorSync;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +26,15 @@ public class DosageCalcController {
     @Autowired
     private DosageRepository dosageRepository;
 
+    @Autowired
+    private DosageCalculatorSync dosageCalculatorSync;
+
     @GetMapping("/patientform")
     public String showPatientForm(Model model) {
         model.addAttribute("patient", new Patient(0, 0)); // Inicializa con valores por defecto
         return "patient-form"; // Nombre de la vista del formulario
     }
+private boolean useThreads = true; //change to false if don´t want to use threads
 
     @PostMapping("/calculateDosage")
     public String calculateDosage(@RequestParam Integer age,
@@ -45,9 +50,17 @@ public class DosageCalcController {
                     .orElseThrow(() -> new IllegalArgumentException("Medicine not found"));
             Dosage dosage = dosageRepository.findByMedicationId(medicineId);
 
-            // Calcular dosis
-            String dosageResult = dosageCalculator.calculateDosage(patient, medicine, dosage);
+            String dosageResult;
 
+            if(useThreads) {
+                //Use thread version
+                dosageResult = dosageCalculatorSync.calculateDosageConcurrently(dosage, patient, medicine);
+
+            }else {
+                //Use secuencial version
+                dosageResult = dosageCalculator.calculateDosage(patient, medicine, dosage);
+
+            }
             // Agregar resultados al modelo
             model.addAttribute("dosageResult", dosageResult);
             model.addAttribute("patient", patient);

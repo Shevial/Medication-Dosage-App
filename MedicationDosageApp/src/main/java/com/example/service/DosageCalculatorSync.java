@@ -103,10 +103,12 @@ public class DosageCalculatorSync {
         BigDecimal minDoseAdjustedVal = minDoseAdjusted(patient, dosage);
         BigDecimal maxDoseAdjustedVal = maxDoseAdjusted(patient, dosage);
 
+        BigDecimal roundedMinDoseAdjustedVal = minDoseAdjustedVal.setScale(3, BigDecimal.ROUND_HALF_UP);
+        BigDecimal roundedMaxDoseAdjustedVal = maxDoseAdjustedVal.setScale(3, BigDecimal.ROUND_HALF_UP);
+
         verifyLimits(medicine, dosage, patient);
 
-        return "Min Dose Adjusted: " + minDoseAdjustedVal + " mg, Max Dose Adjusted: " + maxDoseAdjustedVal + " mg";
-
+        return "Min Dose Adjusted: " + roundedMinDoseAdjustedVal + " mg, Max Dose Adjusted: " + roundedMaxDoseAdjustedVal + " mg";
 
     }
 }

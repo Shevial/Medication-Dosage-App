@@ -17,7 +17,7 @@ public class DosageCalculatorSync {
     public synchronized void calculateMinDosePerKg(Dosage dosage) {
         BigDecimal averageWeight = BigDecimal.valueOf(70.00);
         BigDecimal minimumFactor = dosage.getMinimum_factor();
-        minDosePerKg = minimumFactor.divide(averageWeight, BigDecimal.ROUND_HALF_UP);
+        minDosePerKg = minimumFactor.divide(averageWeight, 10, BigDecimal.ROUND_HALF_UP);
 
         checkCompletion();
     }
@@ -25,7 +25,7 @@ public class DosageCalculatorSync {
     public synchronized void calculateMaxDosePerKg(Dosage dosage) {
         BigDecimal averageWeight = BigDecimal.valueOf(70.00);
         BigDecimal maximumFactor = dosage.getMaximum_factor();
-        maxDosePerKg = maximumFactor.divide(averageWeight, BigDecimal.ROUND_HALF_UP);
+        maxDosePerKg = maximumFactor.divide(averageWeight, 10, BigDecimal.ROUND_HALF_UP);
 
         checkCompletion();
     }

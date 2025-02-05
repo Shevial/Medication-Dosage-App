@@ -103,8 +103,6 @@ public class DosageCalculator {
     }
 
     public boolean verifyAge(Patient patient){
-        long startTime = System.nanoTime();
-
         boolean result = false;
         int minAge = 15;
         int maxAge = 70;
@@ -113,9 +111,6 @@ public class DosageCalculator {
         if (age >= minAge && age <= maxAge) {
             result = true;
         }
-        long endTime = System.nanoTime();
-        System.out.println("Tme of verifyAge: " + (endTime - startTime) / 1_000_000.0 + " ms");
-
         return result;
     }
     public void verifyLimits(Medicine medicine, Dosage dosage, Patient patient, BigDecimal minDoseAdjusted, BigDecimal maxDoseAdjusted) {

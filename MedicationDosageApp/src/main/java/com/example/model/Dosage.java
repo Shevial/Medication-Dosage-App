@@ -19,15 +19,18 @@ public class Dosage {
 
     public BigDecimal max_daily_dose;
 
+    public BigDecimal avg_weight;
+
     public Dosage() {
     }
 
-    public Dosage(Long medicationId, BigDecimal maximum_factor, BigDecimal minimum_factor, String dosage_frequency, BigDecimal max_daily_dose) {
+    public Dosage(Long medicationId, BigDecimal maximum_factor, BigDecimal minimum_factor, String dosage_frequency, BigDecimal max_daily_dose, BigDecimal avg_weight) {
         this.medicationId = medicationId;
         this.maximum_factor = maximum_factor;
         this.minimum_factor = minimum_factor;
         this.dosage_frequency = dosage_frequency;
         this.max_daily_dose = max_daily_dose;
+        this.avg_weight = avg_weight;
 
     }
 
@@ -67,6 +70,9 @@ public class Dosage {
 
     public void setMax_daily_dose(BigDecimal max_daily_dose) {this.max_daily_dose = max_daily_dose;}
 
+    public BigDecimal getAvg_weight() {return avg_weight;}
+
+    public void setAvg_weight(BigDecimal avg_weight) {this.avg_weight = avg_weight;}
 
     @Override
     public String toString() {
@@ -76,8 +82,8 @@ public class Dosage {
                 ", minimum_factor=" + minimum_factor +
                 ", dosage_frequency='" + dosage_frequency + '\'' +
                 ", max_daily_dose=" + max_daily_dose +
+                ", avg_weight=" + avg_weight +
                 '}';
     }
-
 }
 

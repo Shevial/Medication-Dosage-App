@@ -17,23 +17,20 @@ public class DosageCalculator {
         }
 
         try {
-            long startTime, endTime; // for counting time
+            System.out.println("Working without threads");
+            long startTime; // for counting time
 
             startTime = System.nanoTime(); // start count time
             BigDecimal minDose = minDoseAdjusted(patient, dosage);
-            endTime = System.nanoTime();  // end count time
-            System.out.println("Time of minDoseAdjusted: " + (endTime - startTime) / 1_000_000.0 + " ms");
-
-
-            startTime = System.nanoTime();
             BigDecimal maxDose = maxDoseAdjusted(patient, dosage);
-            endTime = System.nanoTime();
-            System.out.println("Time of maxDoseAdjusted: " + (endTime - startTime) / 1_000_000.0 + " ms");
 
             verifyLimits(medicine, dosage, patient, minDose, maxDose);
             //Rounding ONLY BEFORE printing
             BigDecimal minDoseRounded = minDose.setScale(3, RoundingMode.HALF_UP);
             BigDecimal maxDoseRounded = maxDose.setScale(3, RoundingMode.HALF_UP);
+
+            long endTime = System.nanoTime(); // End measuring total time
+            System.out.println("Total time for calculateDosage: " + (endTime - startTime) / 1_000_000.0 + " ms");
 
             return "Medication is valid. Recommended dosage for " + patient.getWeight() + " kg is: " + minDoseRounded +
                     ". Do NOT exceed maximum daily dose: "+ dosage.getMax_daily_dose() + " and do not exceed maximum dose: " +
@@ -48,26 +45,20 @@ public class DosageCalculator {
     //dosePerKg = minimum_factor / average weight
 
     public BigDecimal minDosePerKg(Dosage dosage){
-        long startTime = System.nanoTime();
 
         BigDecimal averageWeight = BigDecimal.valueOf(70.00);
         BigDecimal minimumFactor = dosage.getMinimum_factor();
         BigDecimal result = minimumFactor.divide(averageWeight, 10, BigDecimal.ROUND_HALF_UP);
 
-        long endTime = System.nanoTime();
-        System.out.println("Time of minDosePerKg: " + (endTime - startTime) / 1_000_000.0 + " ms");
-
         return result;
     }
     public BigDecimal maxDosePerKg(Dosage dosage){
-        long startTime = System.nanoTime();
 
         BigDecimal averageWeight = BigDecimal.valueOf(70.00);
+        if (dosage.getAvg_weight() != null) { averageWeight = dosage.getAvg_weight();
+        }
         BigDecimal maximumFactor = dosage.getMaximum_factor();
         BigDecimal result = maximumFactor.divide(averageWeight, 10, BigDecimal.ROUND_HALF_UP);
-
-        long endTime = System.nanoTime();
-        System.out.println("Time of maxDosePerKg: " + (endTime - startTime) / 1_000_000.0 + " ms");
 
         return result;
     }
@@ -77,27 +68,19 @@ public class DosageCalculator {
     //adjustedDose = minDosePerkg * patientWeight
 
     public BigDecimal minDoseAdjusted(Patient patient, Dosage dosage) {
-        long startTime = System.nanoTime();
 
         BigDecimal minDosePerKg = minDosePerKg(dosage);
         BigDecimal patientWeight = BigDecimal.valueOf(patient.getWeight());
         BigDecimal result = minDosePerKg.multiply(patientWeight);
 
-        long endTime = System.nanoTime();
-        System.out.println("Time of minDoseAdjusted: " + (endTime - startTime) / 1_000_000.0 + " ms");
-
         return result;
     }
 
     public BigDecimal maxDoseAdjusted(Patient patient, Dosage dosage) {
-        long startTime = System.nanoTime();
 
         BigDecimal maxDosePerKg = maxDosePerKg(dosage);
         BigDecimal patientWeight = BigDecimal.valueOf(patient.getWeight());
         BigDecimal result = maxDosePerKg.multiply(patientWeight);
-
-        long endTime = System.nanoTime();
-        System.out.println("Time of maxDoseAdjusted: " + (endTime - startTime) / 1_000_000.0 + " ms");
 
         return result;
     }
@@ -114,7 +97,6 @@ public class DosageCalculator {
         return result;
     }
     public void verifyLimits(Medicine medicine, Dosage dosage, Patient patient, BigDecimal minDoseAdjusted, BigDecimal maxDoseAdjusted) {
-        long startTime = System.nanoTime();
 
         BigDecimal maxDailyDose = dosage.getMax_daily_dose();
 
@@ -127,10 +109,7 @@ public class DosageCalculator {
         if (!verifyAge(patient)) {
             throw new IllegalArgumentException("Medication " + medicine.getName() + " is not safe for patient age: " + patient.getAge());
         }
-
-        long endTime = System.nanoTime();
-        System.out.println("Time of verifyLimits: " + (endTime - startTime) / 1_000_000.0 + " ms");
-}
+    }
 
     }
 

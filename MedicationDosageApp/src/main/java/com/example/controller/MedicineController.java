@@ -93,6 +93,7 @@ public class MedicineController {
                 existingDosage.setMaximum_factor(dosage.getMaximum_factor());
                 existingDosage.setDosage_frequency(dosage.getDosage_frequency());
                 existingDosage.setMax_daily_dose(dosage.getMax_daily_dose());
+                existingDosage.setAvg_weight(dosage.getAvg_weight());
                 dosageRepository.save(existingDosage);
             } else {
                 dosage.setMedicationId(medicine.getId());

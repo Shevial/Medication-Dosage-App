@@ -38,7 +38,12 @@
         <div>
             <label for="max_daily_dose">>Maxima dosis diaria</label>
             <input type="text" id="max_daily_dose" th:field="*{max_daily_dose}" />
-            <div th:if="${#fields.hasErrors('dosage_frequency')}" th:errors="*{max_daily_dose}">Maxima dosis diaria</div>
+            <div th:if="${#fields.hasErrors('max_daily_dose')}" th:errors="*{max_daily_dose}">Maxima dosis diaria es obligatoria</div>
+        </div>
+        <div>
+            <label for="avg_weight">> Peso medio del prospecto </label>
+            <input type="text" id="avg_weight" th:field="*{avg_weight}" />
+            <div th:if="${#fields.hasErrors('avg_weight')}" th:errors="*{avg_weight}">Peso </div>
         </div>
     </div>
 

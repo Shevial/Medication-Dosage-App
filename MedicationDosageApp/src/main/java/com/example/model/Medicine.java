@@ -33,7 +33,7 @@ public class Medicine {
     public Medicine() {
     }
 
-    @Autowired
+   // @Autowired
     public Medicine(Long id, String name, String details) {
         this.id = id;
         this.name = name;

@@ -1,4 +1,4 @@
-package com.example.controller;
+/*package com.example.controller;
 
 import com.example.model.Medicine;
 import com.example.model.Patient;
@@ -74,4 +74,4 @@ private boolean useThreads = true; //change to false if don´t want to use threa
             return "error"; // Nombre de la vista de error
         }
     }
-}
+}*/

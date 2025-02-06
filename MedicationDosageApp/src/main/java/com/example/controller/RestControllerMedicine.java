@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,21 +24,16 @@ public class RestControllerMedicine {
     @Autowired
     private DosageRepository dosageRepository;
 
-
-    @PostMapping("/")
+    @PostMapping("/form")
     public ResponseEntity<?> createMedicine(@Valid @RequestBody Medicine medicine) {
-        // Save the Dosage entity first
         if (medicine.getDosage() != null) {
             dosageRepository.save(medicine.getDosage());
         }
-
-        // Save the Medicine entity
         Medicine savedMedicine = medicineRepository.save(medicine);
-
         return ResponseEntity.ok(savedMedicine);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/form/{id}")
     public ResponseEntity<?> updateMedicine(@PathVariable Long id, @Valid @RequestBody Medicine medicine) {
         Optional<Medicine> existingMedicineOpt = medicineRepository.findById(id);
         if (existingMedicineOpt.isEmpty()) {
@@ -46,11 +42,9 @@ public class RestControllerMedicine {
 
         Medicine existingMedicine = existingMedicineOpt.get();
 
-        // Update the Dosage entity
         if (medicine.getDosage() != null) {
             Dosage existingDosage = existingMedicine.getDosage();
             if (existingDosage != null) {
-                // Update existing Dosage
                 existingDosage.setMaximum_factor(medicine.getDosage().getMaximum_factor());
                 existingDosage.setMinimum_factor(medicine.getDosage().getMinimum_factor());
                 existingDosage.setDosage_frequency(medicine.getDosage().getDosage_frequency());
@@ -58,17 +52,46 @@ public class RestControllerMedicine {
                 existingDosage.setAvg_weight(medicine.getDosage().getAvg_weight());
                 dosageRepository.save(existingDosage);
             } else {
-                // Save new Dosage
                 dosageRepository.save(medicine.getDosage());
             }
         }
 
-        // Update the Medicine entity
         existingMedicine.setName(medicine.getName());
         existingMedicine.setDetails(medicine.getDetails());
         existingMedicine.setDosage(medicine.getDosage());
         medicineRepository.save(existingMedicine);
 
         return ResponseEntity.ok(existingMedicine);
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<List<Medicine>> getAllMedicines() {
+        List<Medicine> medicines = medicineRepository.findAll();
+        return ResponseEntity.ok(medicines);
+    }
+
+    @GetMapping("/view/{id}")
+    public ResponseEntity<Medicine> getMedicineById(@PathVariable Long id) {
+        Optional<Medicine> medicine = medicineRepository.findById(id);
+        if (medicine.isPresent()) {
+            return ResponseEntity.ok(medicine.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Transactional
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteMedicineById(@PathVariable Long id) {
+        Optional<Medicine> medicine = medicineRepository.findById(id);
+        if (medicine.isPresent()) {
+            if (medicine.get().getDosage() != null) {
+                dosageRepository.delete(medicine.get().getDosage());
+            }
+            medicineRepository.delete(medicine.get());
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

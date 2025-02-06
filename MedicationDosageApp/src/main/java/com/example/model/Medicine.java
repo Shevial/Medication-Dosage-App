@@ -64,13 +64,6 @@ public class Medicine {
         this.details = details;
     }
 
-   /* public BigDecimal getConcentration() {
-        return concentration;
-    }
-
-    public void setConcentration(BigDecimal concentration) {
-        this.concentration = concentration;
-    }*/
 
     @Override
     public String toString() {
@@ -78,8 +71,6 @@ public class Medicine {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", details='" + details + '\'' +
-               // ", concentration='" + concentration + '\'' +
-
                 '}';
     }
 }

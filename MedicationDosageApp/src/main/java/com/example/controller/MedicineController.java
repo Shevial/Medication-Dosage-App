@@ -1,4 +1,4 @@
-package com.example.controller;
+/*package com.example.controller;
 
 import com.example.model.Medicine;
 import com.example.model.Dosage;
@@ -71,7 +71,7 @@ public class MedicineController {
     }
 
     @PostMapping("/medicines")
-    public String createMedicine(@ModelAttribute Medicine medicine, /*BindingResult medicineresult,*/ @ModelAttribute Dosage dosage,/* BindingResult dosageResult,*/ Model model) {
+    public String createMedicine(@ModelAttribute Medicine medicine,  @ModelAttribute Dosage dosage, Model model) {
         if (!validationService.validateMedicineAndDosage(medicine, dosage, model)) {
             model.addAttribute("medicine", medicine);
             model.addAttribute("dosage", dosage);
@@ -122,4 +122,4 @@ public class MedicineController {
     });
     return "redirect:/medicines";
 }
-}
+}*/

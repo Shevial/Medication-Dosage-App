@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -82,16 +84,15 @@ public class RestControllerMedicine {
 
     @Transactional
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteMedicineById(@PathVariable Long id) {
+    public ResponseEntity<Map<String, String>> deleteMedicineById(@PathVariable Long id) {
         Optional<Medicine> medicine = medicineRepository.findById(id);
         if (medicine.isPresent()) {
-            if (medicine.get().getDosage() != null) {
-                dosageRepository.delete(medicine.get().getDosage());
-            }
             medicineRepository.delete(medicine.get());
-            return ResponseEntity.noContent().build();
+            Map<String, String> response = new HashMap<>();
+            response.put("status", "ok");
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); 
         }
     }
 }

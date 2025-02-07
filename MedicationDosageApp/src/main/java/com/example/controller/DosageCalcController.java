@@ -1,5 +1,5 @@
 /*package com.example.controller;
-
+//XML
 import com.example.model.Medicine;
 import com.example.model.Patient;
 import com.example.model.Dosage;

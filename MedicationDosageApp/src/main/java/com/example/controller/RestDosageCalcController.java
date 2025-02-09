@@ -53,7 +53,7 @@ public class RestDosageCalcController {
                 dosageResult = dosageCalculator.calculateDosage(patient, medicine, dosage);
             }
 
-            // Crear un objeto de respuesta
+// Crear un objeto de respuesta
             DosageResponse response = new DosageResponse(dosageResult, patient, medicine, dosage);
 
             return ResponseEntity.ok(response); // Devuelve la respuesta en JSON
@@ -62,8 +62,7 @@ public class RestDosageCalcController {
             return ResponseEntity.badRequest().body(e.getMessage()); // Devuelve un error en JSON
         }
     }
-
-    // Clase interna para la respuesta
+// Clase interna para la respuesta
     private static class DosageResponse {
         private String dosageResult;
         private Patient patient;
@@ -77,8 +76,7 @@ public class RestDosageCalcController {
             this.dosage = dosage;
         }
 
-        // Getters
-        public String getDosageResult() {
+         public String getDosageResult() {
             return dosageResult;
         }
 

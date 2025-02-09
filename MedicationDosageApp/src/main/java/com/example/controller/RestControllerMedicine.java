@@ -26,6 +26,7 @@ public class RestControllerMedicine {
     @Autowired
     private DosageRepository dosageRepository;
 
+//Creating
     @PostMapping("/form")
     public ResponseEntity<?> createMedicine(@Valid @RequestBody Medicine medicine) {
         if (medicine.getDosage() != null) {
@@ -35,6 +36,7 @@ public class RestControllerMedicine {
         return ResponseEntity.ok(savedMedicine);
     }
 
+    //Updating
     @PutMapping("/form/{id}")
     public ResponseEntity<?> updateMedicine(@PathVariable Long id, @Valid @RequestBody Medicine medicine) {
         Optional<Medicine> existingMedicineOpt = medicineRepository.findById(id);
@@ -65,7 +67,7 @@ public class RestControllerMedicine {
 
         return ResponseEntity.ok(existingMedicine);
     }
-
+//Retrieving
     @GetMapping("/view")
     public ResponseEntity<List<Medicine>> getAllMedicines() {
         List<Medicine> medicines = medicineRepository.findAll();
@@ -81,7 +83,7 @@ public class RestControllerMedicine {
             return ResponseEntity.notFound().build();
         }
     }
-
+//Deleting
     @Transactional
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Map<String, String>> deleteMedicineById(@PathVariable Long id) {

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
-@Controller // 1º
+@Controller
 public class MedicineController {
 
     @Autowired

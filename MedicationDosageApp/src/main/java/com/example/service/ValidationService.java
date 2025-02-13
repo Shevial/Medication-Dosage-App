@@ -2,7 +2,7 @@ package com.example.service;
 
 import com.example.model.Medicine;
 import com.example.model.Dosage;
-import org.springframework.ui.Model;
+
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

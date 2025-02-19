@@ -28,7 +28,7 @@ public class RestDosageCalcController {
     @Autowired
     private DosageCalculatorSync dosageCalculatorSync;
 
-    private boolean useThreads = true; // Cambiar a false si no quieres usar hilos
+    private boolean useThreads = false; // Cambiar a false si no quieres usar hilos
 
     @PostMapping("/calculate")
     public ResponseEntity<?> calculateDosage(

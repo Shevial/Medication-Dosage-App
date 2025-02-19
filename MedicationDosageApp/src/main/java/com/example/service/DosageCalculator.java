@@ -32,8 +32,8 @@ public class DosageCalculator {
             long endTime = System.nanoTime(); // End measuring total time
             System.out.println("Total time for calculateDosage: " + (endTime - startTime) / 1_000_000.0 + " ms");
 
-            return "Medication is valid. Recommended dosage for " + patient.getWeight() + " kg is: " + minDoseRounded +
-                    ". Do NOT exceed maximum daily dose: "+ dosage.getMax_daily_dose() + " and do not exceed maximum dose: " +
+            return "Medication is valid. \n Recommended dosage for " + patient.getWeight() + " kg is: " + minDoseRounded +
+                    ". \n Do NOT exceed maximum daily dose: "+ dosage.getMax_daily_dose() + " \n Do not exceed maximum dose: " +
                     maxDoseRounded;
         } catch (IllegalArgumentException e) {
             return e.getMessage();
@@ -96,19 +96,23 @@ public class DosageCalculator {
         }
         return result;
     }
-    public void verifyLimits(Medicine medicine, Dosage dosage, Patient patient, BigDecimal minDoseAdjusted, BigDecimal maxDoseAdjusted) {
+    public String verifyLimits(Medicine medicine, Dosage dosage, Patient patient, BigDecimal minDoseAdjusted, BigDecimal maxDoseAdjusted) {
 
-        BigDecimal maxDailyDose = dosage.getMax_daily_dose();
+        /*BigDecimal maxDailyDose = dosage.getMax_daily_dose();
 
         if (minDoseAdjusted.compareTo(maxDailyDose) > 0) {
+            System.err.println("Minimum dose exceeds maximum daily dose.");
             throw new IllegalArgumentException("Minimum dose exceeds maximum daily dose.");
         }
         if (maxDoseAdjusted.compareTo(maxDailyDose) > 0) {
+            System.err.println("Maximum dose exceeds maximum daily dose.");
             throw new IllegalArgumentException("Maximum dose exceeds maximum daily dose.");
-        }
+        }*/
         if (!verifyAge(patient)) {
+            System.err.println("Medication is not safe for patient age: " + patient.getAge());
             throw new IllegalArgumentException("Medication " + medicine.getName() + " is not safe for patient age: " + patient.getAge());
         }
+        return null;
     }
 
     }

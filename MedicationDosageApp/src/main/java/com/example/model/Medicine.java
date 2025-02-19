@@ -29,7 +29,6 @@ public class Medicine {
         this.dosage = dosage;
     }
 
-
     public Medicine() {
     }
 

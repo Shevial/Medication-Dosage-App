@@ -38,7 +38,6 @@ public class DosageCalculator {
         } catch (IllegalArgumentException e) {
             return e.getMessage();
         }
-
     }
     //ESTIMATING DOSE PER KG
 

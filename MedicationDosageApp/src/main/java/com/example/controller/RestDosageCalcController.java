@@ -42,7 +42,7 @@ public class RestDosageCalcController {
             // Obtener medicina y dosificación
             Medicine medicine = medicineRepository.findById(medicineId)
                     .orElseThrow(() -> new IllegalArgumentException("Medicine not found"));
-            Dosage dosage = dosageRepository.findByMedicationId(medicineId);
+            Dosage dosage = medicine.getDosage();
 
             String dosageResult;
 

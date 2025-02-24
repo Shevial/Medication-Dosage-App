@@ -42,7 +42,7 @@ function MedicineForm({ medicine, onSubmit, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="medicine-form">
+    <form onSubmit={handleSubmit} className="medicine-form" autocomplete="off">
       <label>
         Name:
         <input

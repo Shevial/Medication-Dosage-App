@@ -1,0 +1,21 @@
+.header {
+    background-color: aqua;
+    color: white;
+  }
+  
+  .title {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .header-list {
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .links {
+    text-decoration: none;
+    color: white;
+  }

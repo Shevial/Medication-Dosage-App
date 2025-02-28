@@ -10,6 +10,8 @@ const ChatComponent = () => {
     const [isConnected, setIsConnected] = useState(false);
     const [showChat, setShowChat] = useState(false);
     const stompClient = useRef(null);
+    const broadcast = useRef(new BroadcastChannel("chat_users"));
+
 
     useEffect(() => {
         if (stompClient.current?.connected) {
@@ -22,7 +24,7 @@ const ChatComponent = () => {
                         console.log('Mensaje recibido:', msg);
                         setMessages(prev => [...prev, {
                             username: msg.username,
-                            content: msg.body // <-- Cambiado de 'body' a 'content'
+                            content: msg.body 
                         }]);
                     } catch (error) {
                         console.error('Error parseando mensaje:', error);
@@ -36,12 +38,16 @@ const ChatComponent = () => {
                 (message) => {
                     try {
                         const msg = JSON.parse(message.body);
-                        console.log('Usuarios recibidos:', msg.body);
-                        setUsers(msg.body.split(',').filter(u => u && u !== 'null'));
+                        const userList = msg.body.split(',').filter(u => u && u !== 'null');
+
+                        setUsers(userList);
+                        console.log('Usuarios recibidos:', userList);
+                        broadcast.current.postMessage(userList); 
                     } catch (error) {
                         console.error('Error parseando usuarios:', error);
                     }
                 }
+            
             );
     
             return () => {
@@ -51,6 +57,13 @@ const ChatComponent = () => {
         }
     }, [stompClient.current?.connected]);
 
+    useEffect(() => {
+        broadcast.current.onmessage = (event) => {
+            console.log("Usuarios sincronizados entre pestañas:", event.data);
+            setUsers(event.data);
+        };
+    }, []);
+
     const connect = () => {
         const socket = new SockJS('http://localhost:8080/websocket-server');
         stompClient.current = new Client({
@@ -59,13 +72,13 @@ const ChatComponent = () => {
             onConnect: () => {
                 console.log("Conectado exitosamente al WebSocket");
                 setIsConnected(true);
-                onStompError: (frame) => {
-                    console.error("Error en STOMP:", frame.headers.message);
-                }
-
                 if (username) {
                     submitJoin(username);
                 }
+                onStompError: (frame) => {
+                    console.error("Error en STOMP:", frame.headers.message);
+                };
+                
             }
         });
         stompClient.current.activate();

@@ -72,9 +72,11 @@ const ChatComponent = () => {
             onConnect: () => {
                 console.log("Conectado exitosamente al WebSocket");
                 setIsConnected(true);
-                if (username) {
-                    submitJoin(username);
-                }
+                setTimeout(() => {
+                    if (username) {
+                        submitJoin(username);
+                    }
+                }, 100); // 100ms de espera para asegurar que la conexión esté establecida
                 onStompError: (frame) => {
                     console.error("Error en STOMP:", frame.headers.message);
                 };

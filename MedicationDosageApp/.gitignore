@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 # .gitignore
-#.env
+.env
 
 ### STS ###
 .apt_generated

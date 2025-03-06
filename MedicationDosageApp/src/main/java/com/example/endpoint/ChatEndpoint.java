@@ -21,6 +21,13 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+/**
+ * Clase que maneja las comunicaciones WebSocket para un chat en tiempo real.
+ * Gestiona las conexiones, desconexiones y mensajes de los usuarios.
+ *
+ * @author Shevia
+ * @version 1.0
+ */
 @Controller
 public class ChatEndpoint {
 
@@ -29,6 +36,14 @@ public class ChatEndpoint {
 
     //Guardamos los atributos de la sesion de cada usuario con respecto al ID de cada sesion
     private static final Map<String, Map<String, Object>> sessions  = new ConcurrentHashMap<>();
+
+    /**
+     * Maneja la entrada de un usuario al chat. Este método se llama cuando un usuario se une a la sala.
+     * Asocia el nombre del usuario a su sesión y envía un mensaje de bienvenida al canal de respuestas.
+     *
+     * @param message El mensaje que contiene el nombre del usuario.
+     * @param accessor El accesorio de la sesión para obtener el ID y atributos de la sesión.
+     */
 
     @MessageMapping("/join")
     public void onJoin(@Payload JoinMessage message, SimpMessageHeaderAccessor accessor){
@@ -62,6 +77,14 @@ public class ChatEndpoint {
 
     }
 
+
+    /**
+     * Maneja el evento de desconexión de un usuario. Este método es llamado cuando un usuario abandona el chat.
+     * Elimina al usuario de la lista de sesiones y actualiza la lista de usuarios conectados.
+     *
+     * @param event El evento de desconexión que contiene los detalles del usuario desconectado.
+     */
+
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         System.out.println("=== DESCONEXION ===");
@@ -87,6 +110,12 @@ public class ChatEndpoint {
         }
     }
 
+    /**
+     * Maneja los mensajes enviados por los usuarios al chat. Reenvía el mensaje al canal de respuestas.
+     *
+     * @param message El mensaje del usuario a ser enviado.
+     * @param accessor El accesorio de la sesión que contiene el nombre del usuario.
+     */
 
     @MessageMapping("/chat")
     public void onMessage(@Payload ChatMessage message, SimpMessageHeaderAccessor accessor) {
@@ -100,11 +129,12 @@ public class ChatEndpoint {
             this.ops.convertAndSend("/topic/responses", verifiedMessage);
         }
     }
-
-
-
-
-//user1, user2, user3
+    
+    /**
+     * Obtiene los nombres de usuario de todos los usuarios conectados en la sesión actual.
+     *
+     * @return Una cadena con los nombres de usuario, separados por comas.
+     */
     private String getUserNames() {
         return sessions.values().stream()
                 .map(v -> v.get("username"))

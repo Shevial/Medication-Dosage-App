@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
-
+/**
+ *  Usuario se conecta (connect()), se suscribe a los canales y envía su nombre (submitJoin()).
+ *  Al recibir un mensaje, se agrega a la lista sin refrescar (setMessages([...prev, msg])).
+ *  Cuando cambia la lista de usuarios, se notifica a otras pestañas con broadcast.postMessage(userList).
+ */
 const ChatComponent = () => {
     const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([]);

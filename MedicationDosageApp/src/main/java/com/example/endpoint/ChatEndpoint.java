@@ -129,7 +129,7 @@ public class ChatEndpoint {
             this.ops.convertAndSend("/topic/responses", verifiedMessage);
         }
     }
-    
+
     /**
      * Obtiene los nombres de usuario de todos los usuarios conectados en la sesión actual.
      *

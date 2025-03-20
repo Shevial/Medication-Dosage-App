@@ -17,7 +17,7 @@ public class Medicine {
 
     private String details;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "dosage_medication_id", referencedColumnName = "medicationId")
     private Dosage dosage;
 

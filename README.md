@@ -25,7 +25,7 @@ Este proyecto es una solución digital diseñada para calcular la dosis exacta d
 1. El usuario introduce:
    - Nombre del medicamento.
    - Dosis recomendada en el prospecto.
-   - Peso estándar para el que está calculada.
+   - Peso estándar para el que está calculada, por defecto 70 kg.
    - Su peso real.
 2. La aplicación calcula la dosis personalizada usando las fórmulas:
    ```

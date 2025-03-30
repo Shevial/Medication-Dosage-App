@@ -27,7 +27,7 @@ Este proyecto es una solución digital diseñada para calcular la dosis exacta d
    - Dosis recomendada en el prospecto.
    - Peso estándar para el que está calculada.
    - Su peso real.
-2. La aplicación calcula la dosis personalizada usando la fórmula:
+2. La aplicación calcula la dosis personalizada usando las fórmulas:
    ```
    Dosis estimada por kg = Dosis recomendada / Peso estándar
    Dosis ajustada = Dosis estimada por kg * Peso real del usuario

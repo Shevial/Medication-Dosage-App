@@ -1,55 +1,75 @@
-# Medication-Dosage-App
-# Proyecto de Desarrollo de Aplicaciones Multiplataforma
+# SISTEMA DE CÁLCULO DE DOSIS DE MEDICAMENTOS
 
 ## Descripción
-Este repositorio contiene prácticas y proyectos desarrollados en el marco del Grado Superior de Desarrollo de Aplicaciones Multiplataforma (DAM). Se centra en la implementación de aplicaciones con funcionalidades CRUD, integración con bases de datos y uso de patrones de diseño, con especial enfoque en el ámbito de la salud.
+Este proyecto es una solución digital diseñada para calcular la dosis exacta de medicamentos en función del peso corporal del paciente. La aplicación busca mejorar la precisión en la administración de medicamentos y reducir el riesgo de efectos adversos por dosis incorrectas.
 
-## Tecnologías Utilizadas
-- **Java** (Spring Boot, Beans, Singleton, Acceso a Datos)
-- **Kotlin** (Desarrollo de aplicaciones móviles)
-- **Bases de Datos** (MySQL, SQLite)
-- **Jupyter Notebook** (Para apuntes y documentación)
-- **GitHub** (Repositorio para versionado y organización de prácticas)
+## Autor
+- **Nombre:** Sara Hevia López  
+- **Curso:** 2 DAM  
 
-## Estructura del Repositorio
-### 📂 `spring`
-- Prácticas relacionadas con el uso de **Beans** y el **patrón Singleton**.
-- Implementaciones en **Spring Boot** con acceso a bases de datos.
+## Características principales
+- Cálculo preciso de dosis basado en el peso del usuario.
+- Interfaz intuitiva y fácil de usar.
+- Persistencia de datos para consultas futuras.
+- Chat en tiempo real con profesionales de la salud.
+- Seguridad en la gestión de datos personales.
 
-### 📂 `JavaDB`
-- Ejercicios de acceso a datos en Java, incluyendo consultas SQL y conexiones con bases de datos.
+## Tecnologías utilizadas
+- **Backend:** Java con Spring Boot.
+- **Frontend:** React con JavaScript.
+- **Base de datos:** SQL.
+- **Despliegue:** Docker.
+- **Scripts y automatización:** Bash Scripting.
 
-### 📂 `kotlin-app`
-- Proyecto de una aplicación móvil con Kotlin.
-- Funcionalidades CRUD.
-- Aplicación orientada al ámbito de la salud (Ejemplo: Control de Tensión Arterial).
-- Posible integración de IA gratuita para análisis de datos.
-
-## Objetivos del Proyecto
-✅ Aplicar buenas prácticas en desarrollo de software.
-✅ Utilizar GitHub como herramienta de gestión y documentación.
-
-## Instalación y Uso
-1. **Clonar el repositorio**
-   ``` 
-   git clone https://github.com/Shevial/Medication-Dosage-App
-   
+## Funcionamiento
+1. El usuario introduce:
+   - Nombre del medicamento.
+   - Dosis recomendada en el prospecto.
+   - Peso estándar para el que está calculada.
+   - Su peso real.
+2. La aplicación calcula la dosis personalizada usando la fórmula:
    ```
-2. **Configurar entorno**
-   - Instalar JDK 23+
-   
-3. **Ejecutar proyecto**
-   - Para proyectos en Spring Boot: `mvn spring-boot:run`
+   Dosis estimada por kg = Dosis recomendada / Peso estándar
+   Dosis ajustada = Dosis estimada por kg * Peso real del usuario
+   ```
+3. Se muestran las dosis mínima, máxima y diaria recomendadas.
+4. Validaciones:
+   - No se calculan dosis para menores de 15 ni mayores de 75 años.
+   - Se advierte si la dosis ajustada es significativamente diferente a la estándar.
+5. Se permite la consulta a un profesional mediante un chat en tiempo real.
+
+## Instalación y uso
+### Requisitos previos
+- Java 23+
+- Docker
+- PostgreSQL 
+
+### Pasos de instalación
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/usuario/proyecto-dosis.git
+   cd proyecto-dosis
+   ```
+2. Configurar la base de datos en `application.properties`.
+3. Ejecutar el backend:
+   ```
+   mvn spring-boot:run
+   ```
+
+4. Acceder a la aplicación en `http://localhost:8080`
 
 ## Contribución
-Si deseas aportar mejoras o correcciones:
-1. Crea un **fork** del repositorio.
-2. Crea una rama nueva con tu mejora: `git checkout -b feature/nueva-funcionalidad`.
-3. Realiza un **pull request**.
+Las contribuciones son bienvenidas. Para colaborar:
+1. Realiza un fork del repositorio.
+2. Crea una rama (`feature-nueva-funcionalidad`).
+3. Realiza cambios y haz commit.
+4. Envía un pull request.
+
+## Licencia
+Este proyecto está bajo la licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
 ## Contacto
-📧 Para dudas o sugerencias, puedes escribirme a [tu-email@example.com] o visitar mi [perfil de GitHub](https://github.com/tu-usuario).
+Para más información o soporte, contactar a **Sara Hevia López**.
 
----
-🚀 **En camino hacia la Inteligencia Artificial en la Salud** 🚀
+
 
